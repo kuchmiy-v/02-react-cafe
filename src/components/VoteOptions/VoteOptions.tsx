@@ -1,6 +1,5 @@
 import css from './VoteOptions.module.css';
-
-export type VoteType = 'good' | 'neutral' | 'bad';
+import type { VoteType } from '../../types/votes';
 
 interface VoteOptionsProps {
   onLeaveFeedback: (option: VoteType) => void;
@@ -18,8 +17,6 @@ export default function VoteOptions({
       <button onClick={() => onLeaveFeedback('good')}>Good</button>
       <button onClick={() => onLeaveFeedback('neutral')}>Neutral</button>
       <button onClick={() => onLeaveFeedback('bad')}>Bad</button>
-      
-      {/* Умовний рендеринг кнопки Reset */}
       {totalFeedback > 0 && (
         <button onClick={onReset} className={css.resetBtn}>
           Reset
