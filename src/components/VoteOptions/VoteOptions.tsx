@@ -2,22 +2,22 @@ import css from './VoteOptions.module.css';
 import type { VoteType } from '../../types/votes';
 
 interface VoteOptionsProps {
-  onLeaveFeedback: (option: VoteType) => void;
+  onVote: (option: VoteType) => void;
   onReset: () => void;
-  totalFeedback: number;
+  canReset: boolean;
 }
 
 export default function VoteOptions({
-  onLeaveFeedback,
+  onVote,
   onReset,
-  totalFeedback,
+  canReset,
 }: VoteOptionsProps) {
   return (
     <div className={css.container}>
-      <button onClick={() => onLeaveFeedback('good')}>Good</button>
-      <button onClick={() => onLeaveFeedback('neutral')}>Neutral</button>
-      <button onClick={() => onLeaveFeedback('bad')}>Bad</button>
-      {totalFeedback > 0 && (
+      <button onClick={() => onVote('good')}>Good</button>
+      <button onClick={() => onVote('neutral')}>Neutral</button>
+      <button onClick={() => onVote('bad')}>Bad</button>
+      {canReset && (
         <button onClick={onReset} className={css.resetBtn}>
           Reset
         </button>

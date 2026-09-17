@@ -36,25 +36,24 @@ export default function App() {
     setVotes({ good: 0, neutral: 0, bad: 0 });
   };
 
-  const totalFeedback = votes.good + votes.neutral + votes.bad;
-  const positivePercentage =
-    totalFeedback > 0 ? Math.round((votes.good / totalFeedback) * 100) : 0;
+  const totalVotes = votes.good + votes.neutral + votes.bad;
+  const positiveRate =
+    totalVotes > 0 ? Math.round((votes.good / totalVotes) * 100) : 0;
+  const canReset = totalVotes > 0;
 
   return (
     <div className={css.app}>
       <CafeInfo />
       <VoteOptions
-        onLeaveFeedback={updateFeedback}
+        onVote={updateFeedback}
         onReset={resetFeedback}
-        totalFeedback={totalFeedback}
+        canReset={canReset}
       />
-      {totalFeedback > 0 ? (
+      {totalVotes > 0 ? (
         <VoteStats
-          good={votes.good}
-          neutral={votes.neutral}
-          bad={votes.bad}
-          total={totalFeedback}
-          positivePercentage={positivePercentage}
+          votes={votes}
+          totalVotes={totalVotes}
+          positiveRate={positiveRate}
         />
       ) : (
         <Notification message="No feedback yet" />
